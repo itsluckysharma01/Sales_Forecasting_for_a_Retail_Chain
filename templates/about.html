@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block title %}About - Sales Forecasting{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-center mb-4">
+            <i class="fas fa-info-circle text-primary"></i> About the System
+        </h1>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Project Overview -->
+    <div class="col-lg-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-project-diagram me-2"></i>Project Overview</h5>
+            </div>
+            <div class="card-body">
+                <h4>Sales Forecasting for a Retail Chain</h4>
+                <p class="lead">
+                    A comprehensive machine learning-powered web application designed to predict future sales 
+                    and provide actionable business insights for retail chain management.
+                </p>
+                <p>
+                    This system leverages historical sales data to uncover patterns such as seasonal trends, 
+                    top-performing stores, and peak sales periods. Built with advanced machine learning algorithms 
+                    and interactive visualizations, it empowers decision-makers with data-driven insights.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Key Features -->
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-star me-2"></i>Key Features</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-3">
+                        <i class="fas fa-chart-line text-primary fa-lg me-2"></i>
+                        <strong>Interactive Analytics:</strong> Explore sales trends through dynamic visualizations
+                    </li>
+                    <li class="mb-3">
+                        <i class="fas fa-brain text-success fa-lg me-2"></i>
+                        <strong>ML Predictions:</strong> Random Forest model with high accuracy for sales forecasting
+                    </li>
+                    <li class="mb-3">
+                        <i class="fas fa-database text-info fa-lg me-2"></i>
+                        <strong>Data Analysis:</strong> Comprehensive EDA with statistical insights
+                    </li>
+                    <li class="mb-3">
+                        <i class="fas fa-lightbulb text-warning fa-lg me-2"></i>
+                        <strong>Business Insights:</strong> Actionable recommendations for optimization
+                    </li>
+                    <li class="mb-3">
+                        <i class="fas fa-mobile-alt text-danger fa-lg me-2"></i>
+                        <strong>Responsive Design:</strong> Works seamlessly on all devices
+                    </li>
+                    <li class="mb-3">
+                        <i class="fas fa-clock text-secondary fa-lg me-2"></i>
+                        <strong>Real-time Processing:</strong> Fast predictions and data visualization
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Technology Stack -->
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="fas fa-code me-2"></i>Technology Stack</h5>
+            </div>
+            <div class="card-body">
+                <h6 class="text-primary"><i class="fas fa-server me-2"></i>Backend</h6>
+                <ul>
+                    <li><strong>Flask:</strong> Python web framework</li>
+                    <li><strong>scikit-learn:</strong> Machine learning library</li>
+                    <li><strong>Pandas:</strong> Data manipulation and analysis</li>
+                    <li><strong>NumPy:</strong> Numerical computing</li>
+                </ul>
+                
+                <h6 class="text-success mt-3"><i class="fas fa-desktop me-2"></i>Frontend</h6>
+                <ul>
+                    <li><strong>Bootstrap 5:</strong> Responsive UI framework</li>
+                    <li><strong>Plotly.js:</strong> Interactive charting library</li>
+                    <li><strong>Font Awesome:</strong> Icon library</li>
+                    <li><strong>JavaScript:</strong> Client-side interactivity</li>
+                </ul>
+                
+                <h6 class="text-warning mt-3"><i class="fas fa-robot me-2"></i>Machine Learning</h6>
+                <ul>
+                    <li><strong>Random Forest Regressor:</strong> Primary prediction model</li>
+                    <li><strong>Label Encoding:</strong> Categorical variable handling</li>
+                    <li><strong>Feature Engineering:</strong> Enhanced model performance</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Model Performance -->
+    <div class="col-lg-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning text-white">
+                <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Model Performance</h5>
+            </div>
+            <div class="card-body">
+                <p>
+                    Our Random Forest model has been trained on extensive historical sales data with the following features:
+                </p>
+                <div class="row text-center mb-3">
+                    <div class="col-md-4">
+                        <div class="p-3 border rounded">
+                            <h4 class="text-primary">13</h4>
+                            <p class="text-muted mb-0">Input Features</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border rounded">
+                            <h4 class="text-success">100</h4>
+                            <p class="text-muted mb-0">Decision Trees</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 border rounded">
+                            <h4 class="text-info">80/20</h4>
+                            <p class="text-muted mb-0">Train/Test Split</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h6 class="mt-4">Features Used:</h6>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Store ID</li>
+                            <li>Product ID</li>
+                            <li>Promotion Status</li>
+                            <li>Holiday Indicator</li>
+                            <li>Store Size</li>
+                            <li>Location Type</li>
+                            <li>Day of Week</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Month</li>
+                            <li>Quarter</li>
+                            <li>Weekend Indicator</li>
+                            <li>Season</li>
+                            <li>Week of Year</li>
+                            <li>Day of Month</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Focus Areas -->
+    <div class="col-lg-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"><i class="fas fa-bullseye me-2"></i>Focus Areas</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 text-center mb-3">
+                        <i class="fas fa-chart-area fa-3x text-primary mb-3"></i>
+                        <h6>Data Analysis (EDA)</h6>
+                        <p class="small text-muted">Exploratory analysis of sales patterns and trends</p>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <i class="fas fa-database fa-3x text-success mb-3"></i>
+                        <h6>SQL Queries</h6>
+                        <p class="small text-muted">Data extraction and manipulation using SQL</p>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <i class="fas fa-project-diagram fa-3x text-info mb-3"></i>
+                        <h6>Regression Modeling</h6>
+                        <p class="small text-muted">Advanced ML models for accurate predictions</p>
+                    </div>
+                    <div class="col-md-3 text-center mb-3">
+                        <i class="fas fa-chart-line fa-3x text-warning mb-3"></i>
+                        <h6>Visualization</h6>
+                        <p class="small text-muted">Interactive charts using Plotly and Matplotlib</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- How to Use -->
+    <div class="col-lg-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0"><i class="fas fa-book me-2"></i>How to Use</h5>
+            </div>
+            <div class="card-body">
+                <ol class="mb-0">
+                    <li class="mb-3">
+                        <strong>Dashboard:</strong> Start with the overview dashboard to see key metrics and performance indicators
+                    </li>
+                    <li class="mb-3">
+                        <strong>Analytics:</strong> Explore detailed visualizations to understand sales trends, seasonality, and patterns
+                    </li>
+                    <li class="mb-3">
+                        <strong>Predict:</strong> Use the prediction form to forecast sales for specific scenarios and configurations
+                    </li>
+                    <li class="mb-3">
+                        <strong>Insights:</strong> Review business insights and recommendations based on data analysis
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contact Info -->
+    <div class="col-lg-12">
+        <div class="card shadow-sm border-primary">
+            <div class="card-body text-center">
+                <h5 class="text-primary mb-3">
+                    <i class="fas fa-graduation-cap me-2"></i>SmartEd Project
+                </h5>
+                <p class="text-muted">
+                    Developed as part of the SmartEd Data Science and Machine Learning curriculum
+                </p>
+                <div class="mt-3">
+                    <a href="/" class="btn btn-primary me-2">
+                        <i class="fas fa-home me-1"></i> Back to Dashboard
+                    </a>
+                    <a href="/analytics" class="btn btn-outline-primary">
+                        <i class="fas fa-chart-bar me-1"></i> View Analytics
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

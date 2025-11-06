@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+
+{% block title %}Predict Sales - Sales Forecasting{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-center mb-4">
+            <i class="fas fa-brain text-primary"></i> Sales Prediction
+        </h1>
+        <p class="text-center text-muted">Use our machine learning model to predict future sales</p>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Prediction Form -->
+    <div class="col-lg-8 mx-auto">
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-calculator me-2"></i>Enter Sales Parameters</h5>
+            </div>
+            <div class="card-body">
+                <form id="predictionForm">
+                    <div class="row g-3">
+                        <!-- Store ID -->
+                        <div class="col-md-6">
+                            <label for="store_id" class="form-label">
+                                <i class="fas fa-store text-primary me-1"></i> Store ID
+                            </label>
+                            <select class="form-select" id="store_id" name="store_id" required>
+                                <option value="">Select Store</option>
+                                {% for store in stores %}
+                                <option value="{{ store }}">Store {{ store }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <!-- Product ID -->
+                        <div class="col-md-6">
+                            <label for="product_id" class="form-label">
+                                <i class="fas fa-box text-success me-1"></i> Product ID
+                            </label>
+                            <select class="form-select" id="product_id" name="product_id" required>
+                                <option value="">Select Product</option>
+                                {% for product in products %}
+                                <option value="{{ product }}">Product {{ product }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <!-- Store Size -->
+                        <div class="col-md-6">
+                            <label for="store_size" class="form-label">
+                                <i class="fas fa-ruler text-info me-1"></i> Store Size
+                            </label>
+                            <select class="form-select" id="store_size" name="store_size" required>
+                                <option value="">Select Size</option>
+                                {% for size in store_sizes %}
+                                <option value="{{ size }}">{{ size }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <!-- Location Type -->
+                        <div class="col-md-6">
+                            <label for="location" class="form-label">
+                                <i class="fas fa-map-marker-alt text-warning me-1"></i> Location Type
+                            </label>
+                            <select class="form-select" id="location" name="location" required>
+                                <option value="">Select Location</option>
+                                {% for loc in locations %}
+                                <option value="{{ loc }}">{{ loc }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <!-- Day of Week -->
+                        <div class="col-md-6">
+                            <label for="day_of_week" class="form-label">
+                                <i class="fas fa-calendar-day text-danger me-1"></i> Day of Week
+                            </label>
+                            <select class="form-select" id="day_of_week" name="day_of_week" required>
+                                <option value="">Select Day</option>
+                                {% for day in days %}
+                                <option value="{{ day }}">{{ day }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <!-- Month -->
+                        <div class="col-md-6">
+                            <label for="month" class="form-label">
+                                <i class="fas fa-calendar text-secondary me-1"></i> Month
+                            </label>
+                            <select class="form-select" id="month" name="month" required>
+                                <option value="">Select Month</option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Quarter -->
+                        <div class="col-md-6">
+                            <label for="quarter" class="form-label">
+                                <i class="fas fa-chart-pie text-primary me-1"></i> Quarter
+                            </label>
+                            <select class="form-select" id="quarter" name="quarter" required>
+                                <option value="">Select Quarter</option>
+                                <option value="1">Q1 (Jan-Mar)</option>
+                                <option value="2">Q2 (Apr-Jun)</option>
+                                <option value="3">Q3 (Jul-Sep)</option>
+                                <option value="4">Q4 (Oct-Dec)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Season -->
+                        <div class="col-md-6">
+                            <label for="season" class="form-label">
+                                <i class="fas fa-leaf text-success me-1"></i> Season
+                            </label>
+                            <select class="form-select" id="season" name="season" required>
+                                <option value="">Select Season</option>
+                                <option value="Winter">Winter</option>
+                                <option value="Spring">Spring</option>
+                                <option value="Summer">Summer</option>
+                                <option value="Fall">Fall</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Week of Year -->
+                        <div class="col-md-4">
+                            <label for="week_of_year" class="form-label">
+                                <i class="fas fa-calendar-week text-info me-1"></i> Week of Year
+                            </label>
+                            <input type="number" class="form-control" id="week_of_year" name="week_of_year" 
+                                   min="1" max="52" required placeholder="1-52">
+                        </div>
+                        
+                        <!-- Day of Month -->
+                        <div class="col-md-4">
+                            <label for="day_of_month" class="form-label">
+                                <i class="fas fa-calendar-alt text-warning me-1"></i> Day of Month
+                            </label>
+                            <input type="number" class="form-control" id="day_of_month" name="day_of_month" 
+                                   min="1" max="31" required placeholder="1-31">
+                        </div>
+                        
+                        <!-- Promotion -->
+                        <div class="col-md-4">
+                            <label for="promotion" class="form-label">
+                                <i class="fas fa-percentage text-danger me-1"></i> Promotion
+                            </label>
+                            <select class="form-select" id="promotion" name="promotion" required>
+                                <option value="">Select</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Holiday -->
+                        <div class="col-md-6">
+                            <label for="holiday" class="form-label">
+                                <i class="fas fa-umbrella-beach text-secondary me-1"></i> Holiday
+                            </label>
+                            <select class="form-select" id="holiday" name="holiday" required>
+                                <option value="">Select</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Is Weekend -->
+                        <div class="col-md-6">
+                            <label for="is_weekend" class="form-label">
+                                <i class="fas fa-calendar-check text-primary me-1"></i> Weekend
+                            </label>
+                            <select class="form-select" id="is_weekend" name="is_weekend" required>
+                                <option value="">Select</option>
+                                <option value="0">Weekday</option>
+                                <option value="1">Weekend</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-magic me-2"></i> Predict Sales
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Prediction Result -->
+        <div id="predictionResult" class="mt-4" style="display: none;">
+            <div class="card shadow-lg border-success">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>Prediction Result</h5>
+                </div>
+                <div class="card-body text-center">
+                    <h6 class="text-muted mb-3">Predicted Daily Sales</h6>
+                    <h1 class="display-2 text-success mb-3" id="predictedValue">0</h1>
+                    <p class="text-muted">Units</p>
+                    <div class="alert alert-info mt-4">
+                        <i class="fas fa-info-circle me-2"></i>
+                        This prediction is based on our Random Forest machine learning model trained on historical sales data.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Error Message -->
+        <div id="errorMessage" class="mt-4" style="display: none;">
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <span id="errorText"></span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.getElementById('predictionForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Hide previous results
+        document.getElementById('predictionResult').style.display = 'none';
+        document.getElementById('errorMessage').style.display = 'none';
+        
+        // Collect form data
+        const formData = {
+            store_id: document.getElementById('store_id').value,
+            product_id: document.getElementById('product_id').value,
+            store_size: document.getElementById('store_size').value,
+            location: document.getElementById('location').value,
+            day_of_week: document.getElementById('day_of_week').value,
+            month: document.getElementById('month').value,
+            quarter: document.getElementById('quarter').value,
+            season: document.getElementById('season').value,
+            week_of_year: document.getElementById('week_of_year').value,
+            day_of_month: document.getElementById('day_of_month').value,
+            promotion: document.getElementById('promotion').value,
+            holiday: document.getElementById('holiday').value,
+            is_weekend: document.getElementById('is_weekend').value
+        };
+        
+        try {
+            const response = await fetch('/api/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok) {
+                // Show prediction result
+                document.getElementById('predictedValue').textContent = result.predicted_sales.toFixed(2);
+                document.getElementById('predictionResult').style.display = 'block';
+                
+                // Scroll to result
+                document.getElementById('predictionResult').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                // Show error
+                document.getElementById('errorText').textContent = result.error || 'An error occurred';
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        } catch (error) {
+            document.getElementById('errorText').textContent = 'Network error. Please try again.';
+            document.getElementById('errorMessage').style.display = 'block';
+        }
+    });
+    
+    // Auto-set weekend based on day selection
+    document.getElementById('day_of_week').addEventListener('change', function() {
+        const day = this.value;
+        const isWeekendSelect = document.getElementById('is_weekend');
+        
+        if (day === 'Saturday' || day === 'Sunday') {
+            isWeekendSelect.value = '1';
+        } else {
+            isWeekendSelect.value = '0';
+        }
+    });
+</script>
+{% endblock %}

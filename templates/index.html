@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Sales Forecasting{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-center mb-4">
+            <i class="fas fa-dashboard text-primary"></i> Sales Dashboard
+        </h1>
+    </div>
+</div>
+
+<!-- Key Metrics Cards -->
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card metric-card shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="metric-icon bg-primary">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h5 class="card-title text-muted mt-3">Total Sales</h5>
+                <h2 class="card-text text-primary">{{ total_sales }}</h2>
+                <p class="text-muted small">Units Sold</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card metric-card shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="metric-icon bg-success">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <h5 class="card-title text-muted mt-3">Total Revenue</h5>
+                <h2 class="card-text text-success">{{ total_revenue }}</h2>
+                <p class="text-muted small">Generated Revenue</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card metric-card shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="metric-icon bg-info">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h5 class="card-title text-muted mt-3">Avg Daily Sales</h5>
+                <h2 class="card-text text-info">{{ avg_daily_sales }}</h2>
+                <p class="text-muted small">Average per Day</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional Metrics -->
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card metric-card shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="metric-icon bg-warning">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h5 class="card-title text-muted mt-3">Total Stores</h5>
+                <h2 class="card-text text-warning">{{ total_stores }}</h2>
+                <p class="text-muted small">Active Stores</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card metric-card shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="metric-icon bg-danger">
+                    <i class="fas fa-box"></i>
+                </div>
+                <h5 class="card-title text-muted mt-3">Total Products</h5>
+                <h2 class="card-text text-danger">{{ total_products }}</h2>
+                <p class="text-muted small">Product Catalog</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card metric-card shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="metric-icon bg-secondary">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h5 class="card-title text-muted mt-3">Best Store</h5>
+                <h2 class="card-text text-secondary">Store {{ best_store }}</h2>
+                <p class="text-muted small">Top Performer</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row text-center">
+                    <div class="col-md-3 mb-3">
+                        <a href="/analytics" class="btn btn-outline-primary btn-lg w-100">
+                            <i class="fas fa-chart-bar d-block mb-2" style="font-size: 2rem;"></i>
+                            View Analytics
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="/predict" class="btn btn-outline-success btn-lg w-100">
+                            <i class="fas fa-brain d-block mb-2" style="font-size: 2rem;"></i>
+                            Make Prediction
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="/insights" class="btn btn-outline-info btn-lg w-100">
+                            <i class="fas fa-lightbulb d-block mb-2" style="font-size: 2rem;"></i>
+                            View Insights
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <a href="/about" class="btn btn-outline-warning btn-lg w-100">
+                            <i class="fas fa-info-circle d-block mb-2" style="font-size: 2rem;"></i>
+                            About System
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Welcome Message -->
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title"><i class="fas fa-info-circle text-primary me-2"></i>Welcome to Sales Forecasting System</h4>
+                <p class="card-text">
+                    This comprehensive dashboard provides insights into retail sales data across multiple stores and products. 
+                    Use the navigation menu to explore detailed analytics, make sales predictions using our machine learning model, 
+                    and discover actionable business insights.
+                </p>
+                <hr>
+                <h5><i class="fas fa-rocket text-success me-2"></i>Features:</h5>
+                <ul>
+                    <li><strong>Real-time Analytics:</strong> Visualize sales trends, seasonal patterns, and store performance</li>
+                    <li><strong>ML Predictions:</strong> Forecast future sales using Random Forest regression model</li>
+                    <li><strong>Business Insights:</strong> Discover top-performing stores, products, and optimal strategies</li>
+                    <li><strong>Interactive Visualizations:</strong> Explore data through interactive charts and graphs</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .metric-card {
+        transition: transform 0.3s ease;
+        border: none;
+        border-radius: 10px;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .metric-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        color: white;
+        font-size: 2rem;
+    }
+</style>
+{% endblock %}

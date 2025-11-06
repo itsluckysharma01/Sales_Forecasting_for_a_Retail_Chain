@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block title %}Insights - Sales Forecasting{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-4 text-center mb-4">
+            <i class="fas fa-lightbulb text-primary"></i> Business Insights
+        </h1>
+        <p class="text-center text-muted">Data-driven recommendations for business optimization</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Top Performing Stores -->
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-trophy me-2"></i>Top 5 Performing Stores</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Store ID</th>
+                                <th>Total Revenue</th>
+                                <th>Avg Sales</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for store in top_stores %}
+                            <tr>
+                                <td>
+                                    <span class="badge bg-primary">{{ loop.index }}</span>
+                                </td>
+                                <td><strong>Store {{ store.Store_ID }}</strong></td>
+                                <td class="text-success">${{ "%.2f"|format(store.Revenue) }}</td>
+                                <td>{{ "%.2f"|format(store.Daily_Sale) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Insight:</strong> Focus marketing efforts and inventory on these top-performing stores to maximize ROI.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Top Performing Products -->
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-star me-2"></i>Top 5 Performing Products</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Product ID</th>
+                                <th>Total Revenue</th>
+                                <th>Avg Sales</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in top_products %}
+                            <tr>
+                                <td>
+                                    <span class="badge bg-success">{{ loop.index }}</span>
+                                </td>
+                                <td><strong>Product {{ product.Product_ID }}</strong></td>
+                                <td class="text-success">${{ "%.2f"|format(product.Revenue) }}</td>
+                                <td>{{ "%.2f"|format(product.Daily_Sale) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Insight:</strong> Ensure adequate stock levels for these high-performing products to prevent stockouts.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Best Months -->
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-warning text-white">
+                <h5 class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Peak Sales Months</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for month in best_months %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-calendar-check text-warning me-2"></i>{{ month }}</span>
+                        <span class="badge bg-warning rounded-pill">Top {{ loop.index }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="alert alert-success mt-3">
+                    <i class="fas fa-lightbulb me-2"></i>
+                    <strong>Recommendation:</strong> Plan promotions and increase inventory during these peak months to maximize sales opportunities.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Promotion Effectiveness -->
+    <div class="col-lg-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"><i class="fas fa-percentage me-2"></i>Promotion Effectiveness</h5>
+            </div>
+            <div class="card-body">
+                <div class="text-center py-4">
+                    <h1 class="display-3 text-danger mb-3">
+                        {{ "%.1f"|format(promo_increase) }}%
+                    </h1>
+                    <p class="lead">Sales Increase with Promotions</p>
+                </div>
+                <div class="progress mb-3" style="height: 30px;">
+                    <div class="progress-bar bg-danger" role="progressbar" 
+                         style="width: {{ promo_increase }}%" 
+                         aria-valuenow="{{ promo_increase }}" aria-valuemin="0" aria-valuemax="100">
+                        {{ "%.1f"|format(promo_increase) }}%
+                    </div>
+                </div>
+                <div class="alert alert-success">
+                    <i class="fas fa-chart-line me-2"></i>
+                    <strong>Insight:</strong> Promotions significantly boost sales. Strategic promotional campaigns during peak seasons can further enhance revenue.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Key Recommendations -->
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="fas fa-clipboard-list me-2"></i>Strategic Recommendations</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="text-primary"><i class="fas fa-check-circle me-2"></i>Inventory Management</h6>
+                        <ul>
+                            <li>Stock up high-performing products before peak months</li>
+                            <li>Optimize inventory levels for top-performing stores</li>
+                            <li>Implement just-in-time inventory for slow-moving items</li>
+                        </ul>
+                        
+                        <h6 class="text-success mt-4"><i class="fas fa-check-circle me-2"></i>Marketing Strategy</h6>
+                        <ul>
+                            <li>Focus promotional campaigns during identified peak months</li>
+                            <li>Allocate more marketing budget to top-performing stores</li>
+                            <li>Create targeted campaigns for best-selling products</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h6 class="text-warning"><i class="fas fa-check-circle me-2"></i>Sales Optimization</h6>
+                        <ul>
+                            <li>Increase staffing during peak sales periods and weekends</li>
+                            <li>Implement cross-selling strategies for high-performing products</li>
+                            <li>Analyze and replicate success factors from top stores</li>
+                        </ul>
+                        
+                        <h6 class="text-danger mt-4"><i class="fas fa-check-circle me-2"></i>Seasonal Planning</h6>
+                        <ul>
+                            <li>Prepare for seasonal variations in demand</li>
+                            <li>Adjust pricing strategies based on seasonal trends</li>
+                            <li>Plan holiday promotions well in advance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Action Items -->
+    <div class="col-12">
+        <div class="card shadow-sm border-success">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>Actionable Next Steps</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <div class="p-3 border rounded text-center h-100">
+                            <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                            <h6>Monitor Trends</h6>
+                            <p class="small text-muted">Regularly review sales analytics to identify emerging patterns</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 border rounded text-center h-100">
+                            <i class="fas fa-bullseye fa-3x text-success mb-3"></i>
+                            <h6>Optimize Pricing</h6>
+                            <p class="small text-muted">Use predictive models to set optimal pricing strategies</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 border rounded text-center h-100">
+                            <i class="fas fa-users fa-3x text-warning mb-3"></i>
+                            <h6>Train Staff</h6>
+                            <p class="small text-muted">Share insights with store teams to improve performance</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="p-3 border rounded text-center h-100">
+                            <i class="fas fa-sync-alt fa-3x text-danger mb-3"></i>
+                            <h6>Review Regularly</h6>
+                            <p class="small text-muted">Update forecasts monthly based on actual performance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
