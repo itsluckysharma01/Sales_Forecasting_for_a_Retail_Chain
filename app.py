@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import json
 from datetime import datetime, timedelta
-
+import os
 app = Flask(__name__)
 
 # Load the model and data
@@ -267,5 +267,6 @@ def about():
     """About page"""
     return render_template('about.html')
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Render provides a dynamic port
+    app.run(host="0.0.0.0", port=port, debug=True)
